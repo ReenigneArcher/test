@@ -136,19 +136,19 @@ keywords: "ReenigneArcher,LizardByte,Sunshine,RetroArcher,blog,programming,pytho
 # --- Colours / background image --- #
 ######################################
 
-# Personalize the colours in your website. Colour values can be any valid CSS colour
+# Personalize the colors in your website. Color values can be any valid CSS color
 
-navbar-col: "#EAEAEA"
-navbar-text-col: "#404040"
-navbar-border-col: "#DDDDDD"
-page-col: "#FFFFFF"
-text-col: "#404040"
-link-col: "#008AFF"
-hover-col: "#0085A1"
-footer-col: "#EAEAEA"
-footer-text-col: "#777777"
-footer-link-col: "#404040"
-footer-hover-col: "#0085A1"
+navbar-col: "#242526"
+navbar-text-col: "#e4e6eb"
+navbar-border-col: "#393a3b"
+page-col: "#18191a"
+text-col: "#e4e4e4"
+link-col: "#28a9e6"
+hover-col: "#28a9e6"
+footer-col: "#242526"
+footer-text-col: "#a8aaa8"
+footer-link-col: "#dfdfdf"
+footer-hover-col: "#28a9e6"
 
 # Alternatively, the navbar, footer, and page background can be set to an image
 # instead of colour
