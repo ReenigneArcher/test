@@ -21,7 +21,7 @@ need to provide a token to your workflow to authenticate with an external servic
 ensure that your code works with real services.
 
 ## The Problem
-But, what happens when an external contributor opens a pull request on your project? Your secrets won't be available
+But what happens when an external contributor opens a pull request on your project? Your secrets won't be available
 to the workflow, and most likely it will fail. The default GitHub token will also have read-only access.
 
 Suddenly, you may find yourself in a situation where you can't run your workflow, tests, etc. This can be frustrating,
@@ -68,48 +68,14 @@ This solution is okay, IF the workflow itself is not modified as part of the pul
 modifications, such as installing new build dependencies, this solution will not work as it will use the workflow from
 the base branch instead of from the fork.
 
-### Use GitHub Environments
-Using GitHub environments is another way to solve this problem. GitHub environments are a way to provide a set of
-secrets that are only available for that environment. One common use case of environments is to deploy to a qa
-environment for some conditions, and to a production environment for other conditions.
-
-Let's use that logic to solve the problem of not having secrets available for pull requests from forks. We will create
-an `internal` environment that will not require approval to run. Then we will create an `external` environment that
-will require approval to run.
-
-{% raw %}
-```yaml
-jobs:
-  build:
-    environment:
-      ${{ github.event_name == 'pull_request' &&
-      github.event.pull_request.head.repo.full_name != github.repository &&
-      'external' || 'internal' }}
-```
-{% endraw %}
-
-Now create the environments in your repository settings. The `internal` environment should not require approval, and
-the `external` environment should require approval.
-
-![Environment Settings](/assets/img/posts/2023-10-28-environment-settings-01.png)
-
-Be sure to add your required secrets to each environment.
-
-![Environment Secrets](/assets/img/posts/2023-10-28-environment-settings-02.png)
-
-Now, when a pull request is opened from a fork, the workflow will run in the `external` environment. If the pull
-request is opened from within the repository, the workflow will run in the `internal` environment. In both cases,
-the workflow will have access to the secrets that are defined for that environment.
-
 #### Final thoughts
 
-I use this logic in my [create-release-action](https://github.com/LizardByte/create-release-action) repository. This is
-because when a PR is opened from dependabot or a fork, I want to ensure that the action works as expected. Check the
-[workflow](https://github.com/LizardByte/create-release-action/blob/361a8a8ef88735b64ac29db047c8622ba4ab1196/.github/workflows/ci.yml)
-for a complete example.
+GitHub is very cautious about giving secret access to any external branches. Even with settings such as
+`Require approval for all outside collaborators` enabled, the secrets are never provided to forks. In my opinion, this
+is due to a lack of trust against developers on GitHub. Inexperienced maintainers are often approving workflow runs,
+without understanding what changes are in the PR. It seems like a punishment for experienced maintainers and can be
+cumbersome for many open-source projects that require secrets in CI/CD pipelines.
 
-{: .box-warning}
-You must be very cautious when exposing secrets to external contributors. A bad actor could use the secrets for
-malicious purposes. In addition to the `external` environment approval, I also require workflow approval for all
-outside collaborators as a secondary measure. Be sure to fully review the code of any pull requests before approving
-the workflows or deployment.
+I've personally spent far too much time trying to work around these issues. Due to these limitations, I'm planning to
+attempt to develop a tool that can provide secrets to workflows, without the need for storing the secrets in GitHub
+directly. I will update this post with more details once it's available.
