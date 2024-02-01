@@ -5,7 +5,6 @@ subtitle: How to use GitHub secrets in pull requests from forks
 gh-repo: reenignearcher/reenignearcher.github.io
 gh-badge: [follow]
 tags: [github, github-workflows, ci, cd, devopos]
-thumbnail-img: /assets/img/posts/2023-10-28-environment-settings-01.png
 comments: true
 author: ReenigneArcher
 ---
