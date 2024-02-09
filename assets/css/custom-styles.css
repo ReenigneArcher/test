@@ -1,3 +1,15 @@
 .box-error, .box-note, .box-warning {
     color: #18191a;
 }
+
+/* in line code */
+code {
+  color: #fb660a;
+  background-color: #111111;
+}
+
+/* page navigation buttons */
+.pagination .page-item .page-link {
+  background-color: #111111;
+  color: #e4e4e4;
+}
