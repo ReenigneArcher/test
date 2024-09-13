@@ -19,6 +19,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   call_build:
     uses: reenignearcher/beautiful-jekyll/.github/workflows/ci.yml@ci/workflow/make-build-reusable
