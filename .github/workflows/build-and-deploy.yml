@@ -1,0 +1,30 @@
+---
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish the site'
+        required: false
+        default: 'false'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  call_build:
+    uses: reenignearcher/beautiful-jekyll/.github/workflows/ci.yml@master
+    with:
+      publish: ${{ 
+          (github.event_name == 'push' && github.ref == 'refs/heads/master') || 
+          github.event.inputs.publish == 'true' || 
+          'false' 
+        }}
