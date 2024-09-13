@@ -21,7 +21,7 @@ concurrency:
 
 jobs:
   call_build:
-    uses: reenignearcher/beautiful-jekyll/.github/workflows/ci.yml@master
+    uses: reenignearcher/beautiful-jekyll/.github/workflows/ci.yml@ci/workflow/make-build-reusable
     with:
       publish: ${{ 
           (github.event_name == 'push' && github.ref == 'refs/heads/master') || 
