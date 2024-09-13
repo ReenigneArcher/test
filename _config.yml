@@ -13,7 +13,7 @@
 # https://beautifuljekyll.com/getstarted/#method-1-github-repository-with-remote_theme
 # remote_theme: daattali/beautiful-jekyll@6.0.1
 # remote_theme: daattali/beautiful-jekyll@8854d96eab09b1c696bbdef8c1d1ff55cd923737  # get fix for pinned footer
-remote_theme: reenignearcher/beautiful-jekyll@b8e13290831a3160751761ecce52800c694560f3
+remote_theme: reenignearcher/beautiful-jekyll@88807f0b07d436c17e9fb337a34a947292d308dc
 
 # Name of website
 title: ReenigneArcher's Blog
