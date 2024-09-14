@@ -17,7 +17,7 @@ on:
       theme_version:
         description: 'The version of the theme to use'
         type: string
-        default: 'master'
+        default: 'ci/workflow/make-build-reusable'
 
 permissions:
   contents: read
@@ -30,11 +30,11 @@ concurrency:
 
 jobs:
   call_build:
-    uses: reenignearcher/beautiful-jekyll/.github/workflows/ci.yml@master
+    uses: reenignearcher/beautiful-jekyll/.github/workflows/ci.yml@ci/workflow/make-build-reusable
     with:
       publish: ${{
           (github.event_name == 'push' && github.ref == 'refs/heads/master') ||
           github.event.inputs.publish == 'true' ||
           'false'
         }}
-      theme_version: ${{ github.event.inputs.theme_version || 'master' }}
+      theme_version: ${{ github.event.inputs.theme_version || 'ci/workflow/make-build-reusable' }}
